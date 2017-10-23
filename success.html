@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+	</head>
+
+	<body>
+
+		<h1 class="text"></h1>
+		<div class="">
+			<span id="time" style="color:red; font-size: 20px;">5</span>秒后自动跳转回主页...
+		</div>
+		<script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+		<script type="text/javascript">
+	$(".text").html("等待支付！")
+	window.onload = function() {
+				function urlobj1(url) {
+					var aaa = url.split("?")[0];
+					var bbb = url.split("?")[1];
+					var ccc = bbb.split("&");
+					var obj = {};
+					var params = {};
+					obj["url"] = aaa;
+					for(var i = 0; i < ccc.length; i++) {
+						params[ccc[i].split("=")[0]] = ccc[i].split("=")[1];
+					}
+					obj["params"] = params
+					return obj.params;
+				}
+
+				function name(aaa) {
+					switch(aaa) {
+						case 'new':
+							return '待支付！'
+							break;
+						case 'close':
+							return '已入住！'
+							break;
+						case 'cancel':
+							return '已取消！'
+							break;
+					    case "settlement":
+							return '等待处理。。。'
+							break;
+						default:
+							return '异常！！';
+					}
+				}
+				
+				var obj = urlobj1(window.location.href);
+
+				if(obj.order_sn) {
+					$.ajax({
+						type: "post",
+						url: "http://pay.usian.cn/Api/OrderQuery/get.html",
+						data: {
+							token:window.localStorage.token,
+							order_sn:obj.order_sn
+						},
+						dataType: "json",
+						success: function(res) {
+							console.log(res)
+							var st = res.info.status;
+							$(".text").html(name(st))
+							var time = 5;
+							var timer = setInterval(function() {
+								if(time > 0) {
+									time--;
+									$("#time").html(time)
+								} else {
+									clearInterval(timer)
+									window.location.href = 'http://pay.usian.cn/';
+								}
+							},1000)
+						}
+					});
+				} else {
+					$(".text").html("交易有误！")
+				}
+	}
+		</script>
+	</body>
+
+</html>
