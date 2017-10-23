@@ -57,7 +57,7 @@ export default {
         var token = this.$store.getters.getToken;
         var pay_id = this.$store.getters.newOrderInfo.pay[0].pay_id;
         var order_sn = this.$store.getters.newOrderInfo.order_sn;
-        var callback = 'http://pay.usian.cn/success.html';
+        var callback = 'http://pay.usian.cn/#/orderList';
 
         this.$store.dispatch('pay',{token,pay_id,order_sn,callback})
         .then((res) => {

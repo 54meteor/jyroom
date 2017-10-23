@@ -77,7 +77,6 @@ var store =  new Vuex.Store({
         }))
       },
       getOrderList({state},page){
-        console.log('page',page)
         return axios.post('http://pay.usian.cn/Api/OrderQuery/query.html',qs.stringify({
           token:state.token,
           page:page

@@ -8,6 +8,7 @@
       </mt-header>
 
       <div class="content">
+
           <ul v-infinite-scroll="loadMore"
               infinite-scroll-distance="10">
             <li v-for="room in renderList">
@@ -19,7 +20,6 @@
                 </mt-checklist>
             </li>
           </ul>
-
       </div>
       <div class="footer">
           <mt-button  type="primary" size="large" @click.native="reservation">订房</mt-button>
@@ -89,6 +89,9 @@ export default {
           duration: 1500
         });
       }
+    },
+    loadTop(){
+
     }
   }
 }
