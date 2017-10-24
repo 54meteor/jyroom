@@ -37,7 +37,7 @@
       style="z-index:9999"
     />
 
-    <mt-button type="primary" size="large" style="margin-top:20px;" @click.native="checkRoom">查询房间</mt-button>
+    <mt-button type="primary" size="large" style="margin:20px auto;width:9rem;" @click.native="checkRoom">查询房间</mt-button>
   </div>
 </template>
 
@@ -164,4 +164,5 @@ input{
 .mint-popup{
   z-index: 9999;
 }
+
 </style>

@@ -104,8 +104,8 @@ export default {
     settlepay(order_sn){
         var token = this.$store.getters.getToken;
         //支付方式  写死了！！！！！！！
-        var pay_id =1;
-        var callback = 'http://pay.usian.cn/success.html';
+        var pay_id = 1;
+        var callback = 'http://pay.usian.cn/#/orderList';
         this.$store.dispatch('pay',{token,pay_id,order_sn,callback})
         .then((res) => {
           if(res.data.message=='ok'){
